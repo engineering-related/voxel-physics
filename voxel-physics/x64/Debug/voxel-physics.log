@@ -1,4 +1,4 @@
-﻿Build started 2022-08-09 20:43:49.
+﻿Build started 2022-08-10 00:53:25.
 Logging verbosity is set to: Normal.     1>Project "C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\voxel-physics.vcxproj" on node 2 (Build target(s)).
      1>InitializeBuildStatus:
          Creating "x64\Debug\voxel-physics.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -8,7 +8,7 @@ Logging verbosity is set to: Normal.     1>Project "C:\Users\vikto\Code\GitHub\v
      1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Shader.h(94,27): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
      1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Shader.h(93,27): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
      1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\VertexArray.h(36,1): warning C4312: 'reinterpret_cast': conversion from 'uint32_t' to 'const void *' of greater size
-     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Main.cpp(56,28): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Main.cpp(60,28): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
      1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(146,15): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
        C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(145): message : while compiling class template member function 'float engine::Ease<glm::vec3>::outCirc(float)'
        C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(47): message : see reference to function template instantiation 'float engine::Ease<glm::vec3>::outCirc(float)' being compiled
@@ -72,7 +72,7 @@ Build succeeded.
          C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Shader.h(94,27): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
          C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Shader.h(93,27): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
          C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\VertexArray.h(36,1): warning C4312: 'reinterpret_cast': conversion from 'uint32_t' to 'const void *' of greater size
-         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Main.cpp(56,28): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Main.cpp(60,28): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
          C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(146,15): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
          C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(142,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
          C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(138,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
@@ -104,4 +104,4 @@ Build succeeded.
     27 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:03.30
+Time Elapsed 00:00:03.38

@@ -182,6 +182,9 @@ public:
     return projMatrix * viewMatrix;
   }
 
+  inline const mat4x4& getViewMatrix() const { return viewMatrix; }
+  inline const mat4x4& getProjectionMatrix() const { return projMatrix; }
+
 private:
   void setViewMatrix() {
     viewMatrix = lookAt(getEye(), center, upVector);

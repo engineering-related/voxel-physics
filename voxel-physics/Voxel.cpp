@@ -8,15 +8,39 @@ Voxel::Voxel(vec3 position, vec3 rotation, vec3 color)
 	m_Rotation = rotation;
 	m_Color = color;
 
-	const std::array<Vertex, 8> vertices = {
-		Vertex{{ CUBE_POSITION.x - CUBE_SIZE.x / 2.f, CUBE_POSITION.y - CUBE_SIZE.y / 2.f, CUBE_POSITION.z + CUBE_SIZE.z / 2.f }, color },
-		Vertex{{ CUBE_POSITION.x - CUBE_SIZE.x / 2.f, CUBE_POSITION.y - CUBE_SIZE.y / 2.f, CUBE_POSITION.z - CUBE_SIZE.z / 2.f }, color },
-		Vertex{{ CUBE_POSITION.x + CUBE_SIZE.x / 2.f, CUBE_POSITION.y - CUBE_SIZE.y / 2.f, CUBE_POSITION.z - CUBE_SIZE.z / 2.f }, color },
-		Vertex{{ CUBE_POSITION.x + CUBE_SIZE.x / 2.f, CUBE_POSITION.y - CUBE_SIZE.y / 2.f, CUBE_POSITION.z + CUBE_SIZE.z / 2.f }, color },
-		Vertex{{ CUBE_POSITION.x - CUBE_SIZE.x / 2.f, CUBE_POSITION.y + CUBE_SIZE.y / 2.f, CUBE_POSITION.z + CUBE_SIZE.z / 2.f }, color },
-		Vertex{{ CUBE_POSITION.x - CUBE_SIZE.x / 2.f, CUBE_POSITION.y + CUBE_SIZE.y / 2.f, CUBE_POSITION.z - CUBE_SIZE.z / 2.f }, color },
-		Vertex{{ CUBE_POSITION.x + CUBE_SIZE.x / 2.f, CUBE_POSITION.y + CUBE_SIZE.y / 2.f, CUBE_POSITION.z - CUBE_SIZE.z / 2.f }, color },
-		Vertex{{ CUBE_POSITION.x + CUBE_SIZE.x / 2.f, CUBE_POSITION.y + CUBE_SIZE.y / 2.f, CUBE_POSITION.z + CUBE_SIZE.z / 2.f }, color }
+	float w = 1.0f;
+
+	const std::array<Vertex, 24> vertices = {
+		// Front
+		Vertex{{-w/2, -w/2, -w/2}, color, 0},
+		Vertex{{-w/2, +w/2, -w/2}, color, 0},
+		Vertex{{+w/2, +w/2, -w/2}, color, 0},
+		Vertex{{+w/2, -w/2, -w/2}, color, 0},
+		// Back
+		Vertex{{-w/2, -w/2, +w/2}, color, 1},
+		Vertex{{-w/2, +w/2, +w/2}, color, 1},
+		Vertex{{+w/2, +w/2, +w/2}, color, 1},
+		Vertex{{+w/2, -w/2, +w/2}, color, 1},
+		// Top
+		Vertex{{-w/2, +w/2, -w/2}, color, 2},
+		Vertex{{-w/2, +w/2, +w/2}, color, 2},
+		Vertex{{+w/2, +w/2, +w/2}, color, 2},
+		Vertex{{+w/2, +w/2, -w/2}, color, 2},
+		//  Bottom
+		Vertex{{-w/2, -w/2, -w/2}, color, 3},
+		Vertex{{-w/2, -w/2, +w/2}, color, 3},
+		Vertex{{+w/2, -w/2, +w/2}, color, 3},
+		Vertex{{+w/2, -w/2, -w/2}, color, 3},
+		// Left
+		Vertex{{-w/2, -w/2, -w/2}, color, 4},
+		Vertex{{-w/2, -w/2, +w/2}, color, 4},
+		Vertex{{-w/2, +w/2, +w/2}, color, 4},
+		Vertex{{-w/2, +w/2, -w/2}, color, 4},
+		// Right
+		Vertex{{+w/2, -w/2, -w/2}, color, 5},
+		Vertex{{+w/2, -w/2, +w/2}, color, 5},
+		Vertex{{+w/2, +w/2, +w/2}, color, 5},
+		Vertex{{+w/2, +w/2, -w/2}, color, 5}
 	};
 
 
@@ -27,6 +51,7 @@ Voxel::Voxel(vec3 position, vec3 rotation, vec3 color)
     VertexBufferLayout layout;
     layout.push<float>(3);
     layout.push<float>(3);
+	layout.push<float>(1);
     m_VAO->addVertexBuffer(m_VBO, layout);
 }
 
@@ -43,14 +68,13 @@ mat4x4 Voxel::getMatrix() const {
 
 	mat4 TRS(1.f);
 	// translation * rotation * scale (also know as TRS matrix)
-	TRS = translate(TRS, m_Position) * scale(TRS, CUBE_SIZE) * transformY * transformX * transformZ;
+	TRS = translate(TRS, m_Position) * transformY * transformX * transformZ;
 	return TRS;
 }
 
 void Voxel::draw(Shader* shader, Camera* camera) {
 	shader->use();
 	shader->setUniform<mat4x4>("u_Model", getMatrix());
-	shader->setUniform<mat4x4>("u_CameraMatrix", camera->getMatrix());
 
 	m_VAO->bind();
 	glDrawElements(GL_TRIANGLES, s_Indices.size(), GL_UNSIGNED_INT, nullptr);
