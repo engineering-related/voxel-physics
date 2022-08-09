@@ -38,9 +38,9 @@ int main() {
 
 		gui->start();
 		gui->submit([]() {
-			ImGui::Begin("Performance"); 
-			ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-			ImGui::End();
+			gui::Begin("Performance"); 
+			gui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / gui::GetIO().Framerate, gui::GetIO().Framerate);
+			gui::End();
 		});
 		gui->end();
 

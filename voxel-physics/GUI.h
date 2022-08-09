@@ -8,6 +8,8 @@
 
 namespace engine 
 {
+	namespace gui = ImGui;
+
 	class GUI
 	{
 	public:
@@ -27,14 +29,14 @@ namespace engine
 		void start() {
 			ImGui_ImplOpenGL3_NewFrame();
 			ImGui_ImplGlfw_NewFrame();
-			ImGui::NewFrame();
+			gui::NewFrame();
 		}
 
 		void end() {
 			for (auto& f : m_RenderFunctions) 
 				f();
-			ImGui::Render();
-			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+			gui::Render();
+			ImGui_ImplOpenGL3_RenderDrawData(gui::GetDrawData());
 			m_RenderFunctions.clear();
 		}
 
@@ -42,11 +44,11 @@ namespace engine
 		std::vector<std::function<void()>> m_RenderFunctions;
 
 		void setup(Window* window) {
-			ImGui::CreateContext();
-			ImGuiIO& io = ImGui::GetIO(); (void)io;
+			gui::CreateContext();
+			ImGuiIO& io = gui::GetIO(); (void)io;
 			//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
 			//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-			ImGui::StyleColorsDark();
+			gui::StyleColorsDark();
 			ImGui_ImplGlfw_InitForOpenGL(window->getGlfwWindowPtr(), true);
 			ImGui_ImplOpenGL3_Init("#version 460");
 		}
@@ -54,7 +56,7 @@ namespace engine
 		void cleanup() {
 			ImGui_ImplOpenGL3_Shutdown();
 			ImGui_ImplGlfw_Shutdown();
-			ImGui::DestroyContext();
+			gui::DestroyContext();
 		}
 
 	};
