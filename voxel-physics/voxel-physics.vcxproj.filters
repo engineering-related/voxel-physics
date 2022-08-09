@@ -28,6 +28,9 @@
     <Filter Include="Header Files\core\gfx">
       <UniqueIdentifier>{eeacba53-1209-4a74-a060-d70eb5c76144}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\shaders">
+      <UniqueIdentifier>{5a063885-9cc1-43e5-b022-e1611079bdb1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -60,14 +63,11 @@
     <ClCompile Include="stb.cpp">
       <Filter>Resource Files\stb</Filter>
     </ClCompile>
+    <ClCompile Include="Voxel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FrameBuffer.h">
-      <Filter>Header Files\core\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderBuffer.h">
-      <Filter>Header Files\core\gfx</Filter>
-    </ClInclude>
     <ClInclude Include="VertexArray.h">
       <Filter>Header Files\core\gfx</Filter>
     </ClInclude>
@@ -83,14 +83,8 @@
     <ClInclude Include="Math.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files\core\gfx</Filter>
-    </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>Header Files\core</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture2D.h">
-      <Filter>Header Files\core\gfx</Filter>
     </ClInclude>
     <ClInclude Include="VertexBuffer.h">
       <Filter>Header Files\core\gfx</Filter>
@@ -107,5 +101,22 @@
     <ClInclude Include="GUI.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="Easing.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="Voxel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\frag.glsl">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="assets\shaders\vert.glsl">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

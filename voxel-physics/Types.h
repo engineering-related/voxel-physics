@@ -11,6 +11,7 @@
 
 namespace engine {
 using GLid = GLuint;
+enum BufferBit { COLOR = GL_COLOR_BUFFER_BIT, DEPTH = GL_DEPTH_BUFFER_BIT };
 
 // Input
 enum class InputButtons { W, A, S, D, Q, E };

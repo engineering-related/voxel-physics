@@ -2,7 +2,6 @@
 #define SHADER
 
 #include "Math.h"
-#include "Texture.h"
 #include "Types.h"
 #include "Utils.h"
 #include <cassert>
@@ -11,6 +10,7 @@
 #include <set>
 #include <string>
 #include <unordered_map>
+#include <plog/Log.h>
 
 namespace engine {
 
@@ -120,19 +120,6 @@ public:
       LOG_FATAL << typeid(T).name();
       assert(!"Type is not implemented.");
     }
-  }
-
-  void bindTexture(std::shared_ptr<Texture> texture, int slot) {
-    glActiveTexture(GL_TEXTURE0 + slot);
-    texture->bind();
-  }
-
-  void bindImageTexture(std::shared_ptr<Texture> texture, const int &unit,
-                        const TextureFormat &format, const Access &access,
-                        const int &level = 0, const bool &layered = false,
-                        const int &layer = 0) {
-    glBindImageTexture(unit, texture->getID(), level, layered, layer,
-                       (GLenum)access, (GLint)format);
   }
 
 private:

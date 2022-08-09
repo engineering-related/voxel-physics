@@ -69,6 +69,10 @@ public:
 
     glfwSwapInterval(vsync);
     glViewport(0, 0, m_Width, m_Height);
+
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_MULTISAMPLE);  
+
   }
   Window() = default;
   // HACK: Destroying OpenGL context segfaults at the end of the program
