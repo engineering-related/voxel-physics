@@ -2,7 +2,7 @@
 #define TEXTURE 
 
 #include "Math.h"
-#include <Logger.h>
+#include <plog/Logger.h>
 #include <glad/glad.h>
 #include <string.h>
 #include <unordered_map>

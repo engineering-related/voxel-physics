@@ -1,11 +1,21 @@
-﻿Build started 2022-08-09 17:08:03.
+﻿Build started 2022-08-09 18:19:07.
 Logging verbosity is set to: Normal.     1>Project "C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\voxel-physics.vcxproj" on node 2 (Build target(s)).
      1>InitializeBuildStatus:
-         Creating "x64\Debug\voxel-physics.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+         Touching "x64\Debug\voxel-physics.tlog\unsuccessfulbuild".
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x64\CL.exe /c /I"C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\libraries\include" /ZI /JMC /nologo /W3 /WX- /diagnostics:column /sdl /Od /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"x64\Debug\\" /Fd"x64\Debug\vc142.pdb" /external:W3 /Gd /TP /FC /errorReport:prompt Main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x64\CL.exe /c /I"C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\libraries\include" /ZI /JMC /nologo /W3 /WX- /diagnostics:column /sdl /Od /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"x64\Debug\\" /Fd"x64\Debug\vc142.pdb" /external:W3 /Gd /TP /FC /errorReport:prompt Main.cpp glad.cpp imgui.cpp imgui_demo.cpp imgui_draw.cpp imgui_impl_glfw.cpp imgui_impl_opengl3.cpp imgui_tables.cpp imgui_widgets.cpp stb.cpp
          Main.cpp
      1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Main.cpp(22,28): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+         glad.cpp
+         imgui.cpp
+         imgui_demo.cpp
+         imgui_draw.cpp
+         imgui_impl_glfw.cpp
+         imgui_impl_opengl3.cpp
+         imgui_tables.cpp
+         imgui_widgets.cpp
+         stb.cpp
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Debug\voxel-physics.exe" /INCREMENTAL /ILK:"x64\Debug\voxel-physics.ilk" /NOLOGO libraries/lib/glfw3.lib opengl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Debug\voxel-physics.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Debug\voxel-physics.lib" /MACHINE:X64 x64\Debug\glad.obj
          x64\Debug\imgui.obj
@@ -17,6 +27,7 @@ Logging verbosity is set to: Normal.     1>Project "C:\Users\vikto\Code\GitHub\v
          x64\Debug\imgui_widgets.obj
          x64\Debug\Main.obj
          x64\Debug\stb.obj
+         LINK : C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Debug\voxel-physics.exe not found or not built by the last incremental link; performing full link
      1>glfw3.lib(context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(context.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Debug\glfw.pdb'; linking object as if no debug info
      1>glfw3.lib(init.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(init.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Debug\glfw.pdb'; linking object as if no debug info
      1>glfw3.lib(input.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(input.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Debug\glfw.pdb'; linking object as if no debug info
@@ -66,4 +77,4 @@ Build succeeded.
     16 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.71
+Time Elapsed 00:00:07.13

@@ -76,6 +76,8 @@ public:
 
   void swapBuffers() { glfwSwapBuffers(m_glfwWindow); }
 
+  void clear(const GLbitfield& clearBitMask) { glClear(clearBitMask); }
+
   GLFWwindow *getGlfwWindowPtr() const { return m_glfwWindow; }
 
   void setTitle(const std::string newTitle) {

@@ -104,5 +104,8 @@
     <ClInclude Include="Utils.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
