@@ -11,15 +11,15 @@ int main() {
 
 	// Window
 	std::string title = "Voxel Physics";
-	Window* window = new Window(1600, 900, title, false);
+	Window* window = new Window(1600, 900, title, false, true, true, 4);
 
 	// GUI
 	GUI* gui = new GUI(window);
 	Shader* shader = new Shader("assets/shaders/vert.glsl",
                               "assets/shaders/frag.glsl");
 
-	Voxel voxel1({ 0, 0, 0 }, { 0, 0, 0 }, { 0.5, 0, 0.59 });
-	Voxel voxel2({ 1, 0, 0 }, { 0, 0, 0 }, { 0.698, 0.62, 0.12 });
+	Voxel voxel1({ 0, 0, 0 }, { 0, 0, 0 }, { 0.5f, 0.2f, 0.6f });
+	Voxel voxel2({ 1, 0, 0 }, { 0, 0, 0 }, { 0.7f, 0.32f, 0.15f });
 
 	// Camera
 	Camera* camera;
@@ -36,18 +36,24 @@ int main() {
 			20.0f,          // Radius
 			0.f,             // AzimuthAngle
 			0.f,             // PolarAngle
-			engine::perspective(FOV, aspectRatio, nearPlane, farPlane),
+			perspective(FOV, aspectRatio, nearPlane, farPlane),
 			FOV,
 			aspectRatio,
 			nearPlane,
 			farPlane
 		);
+		// Change camera aspect ratio and projection matrix if window is resized
+		window->addEventCallback(Event::WINDOW_RESIZED, [&]() {
+			float aspectRatio = (float)window->getWidth() / (float)window->getHeight();
+			camera->setApsectRatio(aspectRatio);
+			camera->setProjectionMatrix(perspective(camera->getFOV(), aspectRatio, camera->getNearPlane(), camera->getFarPlane()));
+		});
 	}
 
 	// Light
-	vec3 lightDir(-1.0f, -1.0f, 0.0f);
+	vec3 lightDir(-1.0f, -1.0f, -0.5f);
 	float ambient = 0.20f;
-	float specular = 0.20f;
+	float specular = 0.40f;
 
 	// Loop
 	float lastTimeSim = 0.0f;
@@ -81,7 +87,7 @@ int main() {
 
 		gui->start();
 		gui->submit([&]() {
-			gui::Begin("Performance"); 
+			gui::Begin("Controls                                                                       "); 
 			gui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / gui::GetIO().Framerate, gui::GetIO().Framerate);
 			gui::SliderFloat3("Light Direction", value_ptr(lightDir), -1.0f, 1.0f);
 			gui::SliderFloat("Ambient", &ambient, 0.0f, 1.0f);

@@ -185,6 +185,12 @@ public:
   inline const mat4x4& getViewMatrix() const { return viewMatrix; }
   inline const mat4x4& getProjectionMatrix() const { return projMatrix; }
 
+  inline void setApsectRatio(const float& aspectRatio) { this->aspectRatio = aspectRatio; }
+  inline void setProjectionMatrix(const mat4x4& projectionMatrix) { this->projMatrix = projectionMatrix; }
+  inline const float& getFOV() const { return FOV; }
+  inline const float& getNearPlane() const { return nearPlane; }
+  inline const float& getFarPlane() const { return farPlane; }
+
 private:
   void setViewMatrix() {
     viewMatrix = lookAt(getEye(), center, upVector);

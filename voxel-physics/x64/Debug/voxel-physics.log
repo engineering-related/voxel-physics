@@ -1,18 +1,18 @@
-﻿Build started 2022-08-10 00:53:25.
+﻿Build started 2022-08-10 02:17:16.
 Logging verbosity is set to: Normal.     1>Project "C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\voxel-physics.vcxproj" on node 2 (Build target(s)).
      1>InitializeBuildStatus:
          Creating "x64\Debug\voxel-physics.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x64\CL.exe /c /I"C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\libraries\include" /ZI /JMC /nologo /W3 /WX- /diagnostics:column /sdl /Od /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"x64\Debug\\" /Fd"x64\Debug\vc142.pdb" /external:W3 /Gd /TP /FC /errorReport:prompt Main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x64\CL.exe /c /I"C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\libraries\include" /ZI /JMC /nologo /W3 /WX- /diagnostics:column /sdl /Od /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"x64\Debug\\" /Fd"x64\Debug\vc142.pdb" /external:W3 /Gd /TP /FC /errorReport:prompt Main.cpp Voxel.cpp
          Main.cpp
      1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Shader.h(94,27): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
      1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Shader.h(93,27): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
      1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\VertexArray.h(36,1): warning C4312: 'reinterpret_cast': conversion from 'uint32_t' to 'const void *' of greater size
-     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Main.cpp(60,28): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Main.cpp(67,28): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
      1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(146,15): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
        C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(145): message : while compiling class template member function 'float engine::Ease<glm::vec3>::outCirc(float)'
        C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(47): message : see reference to function template instantiation 'float engine::Ease<glm::vec3>::outCirc(float)' being compiled
-       C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Camera.h(226): message : see reference to class template instantiation 'engine::Ease<glm::vec3>' being compiled
+       C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Camera.h(235): message : see reference to class template instantiation 'engine::Ease<glm::vec3>' being compiled
      1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(142,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
        C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(141): message : while compiling class template member function 'float engine::Ease<glm::vec3>::outExpo(float)'
        C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(44): message : see reference to function template instantiation 'float engine::Ease<glm::vec3>::outExpo(float)' being compiled
@@ -31,6 +31,36 @@ Logging verbosity is set to: Normal.     1>Project "C:\Users\vikto\Code\GitHub\v
      1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(119,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
        C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(118): message : while compiling class template member function 'float engine::Ease<glm::vec3>::inOutQuad(float)'
        C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(29): message : see reference to function template instantiation 'float engine::Ease<glm::vec3>::inOutQuad(float)' being compiled
+         Voxel.cpp
+     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Shader.h(94,27): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
+     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Shader.h(93,27): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
+     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\VertexArray.h(36,1): warning C4312: 'reinterpret_cast': conversion from 'uint32_t' to 'const void *' of greater size
+     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Voxel.cpp(48,77): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Voxel.cpp(49,61): warning C4267: 'argument': conversion from 'size_t' to 'uint32_t', possible loss of data
+     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Voxel.cpp(80,73): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(146,15): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+       C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(145): message : while compiling class template member function 'float engine::Ease<glm::vec3>::outCirc(float)'
+       C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(47): message : see reference to function template instantiation 'float engine::Ease<glm::vec3>::outCirc(float)' being compiled
+       C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Camera.h(235): message : see reference to class template instantiation 'engine::Ease<glm::vec3>' being compiled
+     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(142,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+       C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(141): message : while compiling class template member function 'float engine::Ease<glm::vec3>::outExpo(float)'
+       C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(44): message : see reference to function template instantiation 'float engine::Ease<glm::vec3>::outExpo(float)' being compiled
+     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(138,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+       C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(137): message : while compiling class template member function 'float engine::Ease<glm::vec3>::inExpo(float)'
+       C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(41): message : see reference to function template instantiation 'float engine::Ease<glm::vec3>::inExpo(float)' being compiled
+     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(134,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+       C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(133): message : while compiling class template member function 'float engine::Ease<glm::vec3>::outQuint(float)'
+       C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(38): message : see reference to function template instantiation 'float engine::Ease<glm::vec3>::outQuint(float)' being compiled
+     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(129,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+       C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(128): message : while compiling class template member function 'float engine::Ease<glm::vec3>::outQuart(float)'
+       C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(35): message : see reference to function template instantiation 'float engine::Ease<glm::vec3>::outQuart(float)' being compiled
+     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(124,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+       C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(123): message : while compiling class template member function 'float engine::Ease<glm::vec3>::outCubic(float)'
+       C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(32): message : see reference to function template instantiation 'float engine::Ease<glm::vec3>::outCubic(float)' being compiled
+     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(119,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+       C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(118): message : while compiling class template member function 'float engine::Ease<glm::vec3>::inOutQuad(float)'
+       C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(29): message : see reference to function template instantiation 'float engine::Ease<glm::vec3>::inOutQuad(float)' being compiled
+         Generating Code...
      1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Window.h(160): warning C4715: 'engine::Window::currently': not all control paths return a value
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Debug\voxel-physics.exe" /INCREMENTAL /ILK:"x64\Debug\voxel-physics.ilk" /NOLOGO libraries/lib/glfw3.lib opengl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Debug\voxel-physics.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Debug\voxel-physics.lib" /MACHINE:X64 x64\Debug\glad.obj
@@ -72,7 +102,20 @@ Build succeeded.
          C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Shader.h(94,27): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
          C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Shader.h(93,27): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
          C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\VertexArray.h(36,1): warning C4312: 'reinterpret_cast': conversion from 'uint32_t' to 'const void *' of greater size
-         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Main.cpp(60,28): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Main.cpp(67,28): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(146,15): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(142,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(138,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(134,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(129,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(124,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(119,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Shader.h(94,27): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
+         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Shader.h(93,27): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
+         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\VertexArray.h(36,1): warning C4312: 'reinterpret_cast': conversion from 'uint32_t' to 'const void *' of greater size
+         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Voxel.cpp(48,77): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Voxel.cpp(49,61): warning C4267: 'argument': conversion from 'size_t' to 'uint32_t', possible loss of data
+         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Voxel.cpp(80,73): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
          C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(146,15): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
          C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(142,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
          C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(138,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
@@ -101,7 +144,7 @@ Build succeeded.
          glfw3.lib(egl_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(egl_context.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Debug\glfw.pdb'; linking object as if no debug info
          glfw3.lib(osmesa_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(osmesa_context.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Debug\glfw.pdb'; linking object as if no debug info
 
-    27 Warning(s)
+    40 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:03.38
+Time Elapsed 00:00:05.29

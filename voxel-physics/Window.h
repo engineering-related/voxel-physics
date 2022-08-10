@@ -40,14 +40,14 @@ using Callback = std::function<void()>;
 class Window {
 public:
   Window(uint32_t width, uint32_t height, std::string title,
-         bool fullScreen = false, bool vsync = false, bool resizeable = false, int samples = 4)
+         bool fullScreen = false, bool vsync = false, bool resizeable = false, int MSAAsamples = 4)
       : m_Width(width), m_Height(height), m_Title(title) {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, OPENGL_MAJOR_VERSION);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, OPENGL_MINOR_VERSION);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, resizeable);
-    glfwWindowHint(GLFW_SAMPLES, samples);
+    glfwWindowHint(GLFW_SAMPLES, MSAAsamples);
 
     m_glfwWindow = glfwCreateWindow(
         m_Width, m_Height, title.c_str(),
@@ -73,6 +73,8 @@ public:
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_MULTISAMPLE);  
 
+	//glEnable(GL_CULL_FACE);
+	//glCullFace(GL_FRONT);
   }
   Window() = default;
   // HACK: Destroying OpenGL context segfaults at the end of the program
@@ -84,7 +86,7 @@ public:
 
   GLFWwindow *getGlfwWindowPtr() const { return m_glfwWindow; }
 
-  void setTitle(const std::string newTitle) {
+  void setTitle(const std::string& newTitle) {
     m_Title = newTitle;
     glfwSetWindowTitle(m_glfwWindow, m_Title.c_str());
   }
