@@ -19,15 +19,12 @@ int main() {
 	Shader* shader = new Shader("assets/shaders/vert.glsl",
                               "assets/shaders/frag.glsl");
 
-    std::uniform_real_distribution<> positionDist(-20.f, 20.f);
+    std::uniform_real_distribution<> positionDist(-100.f, 100.f);
     std::uniform_real_distribution<> rotationDist(-90.f, 90.f);
     std::uniform_real_distribution<> colorDist(0.f, 1.0f);
 
-	uint32_t numInstances = 100;
-	Voxel::init(numInstances);
-
 	std::vector<Voxel*> voxels;
-	for (int32_t i = 0; i < numInstances; i++) {
+	for (int32_t i = 0; i < 20000; i++) {
 		vec3 position = { positionDist(rng), positionDist(rng), positionDist(rng) };
 		vec3 rotation = { rotationDist(rng), rotationDist(rng), rotationDist(rng) };
 		vec3 color = { colorDist(rng), colorDist(rng), colorDist(rng) };
@@ -46,7 +43,7 @@ int main() {
 			window,
 			{0.f, 0.f, 0.f}, // Center
 			{0, 1, 0},       // UpVector
-			20.0f,          // Radius
+			100.0f,          // Radius
 			0.f,             // AzimuthAngle
 			0.f,             // PolarAngle
 			perspective(FOV, aspectRatio, nearPlane, farPlane),
@@ -86,7 +83,16 @@ int main() {
 		window->clear(BufferBit::COLOR | BufferBit::DEPTH);
 
 		camera->update(deltaTime);
-		Voxel::draw(shader, camera, light);
+
+		static float angle = 0;
+		angle += deltaTime;
+		for (size_t i = 0; i < 1000; i++)
+		{
+			vec3 rotation = voxels[i]->getRotation();
+			rotation += deltaTime * 100.f;
+			voxels[i]->setRotation(rotation);
+		}
+		Voxel::drawAll(shader, camera, light);
 
 		gui->start();
 		gui->submit([&]() {
@@ -105,7 +111,6 @@ int main() {
 	}
 
 	// Cleanup
-	Voxel::end();
 	for (auto& voxel : voxels)
 		delete voxel;
 	voxels.clear();

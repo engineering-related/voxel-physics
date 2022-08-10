@@ -12,8 +12,7 @@ out vec3 Normal;
 out vec4 Color;
 
 // Imports the model matrix from the main function
-uniform mat4 u_View;
-uniform mat4 u_Projection;
+uniform mat4 u_CamMatrix;
 
 vec3 getNormal(int face) {
   switch(face) {
@@ -38,5 +37,5 @@ void main() {
   Normal = normalMatrix * getNormal(aFace);
   Color = vec4(aColor, 1.0f);
 
-  gl_Position = u_Projection * u_View * vec4(Position, 1.0);
+  gl_Position = u_CamMatrix * vec4(Position, 1.0);
 }

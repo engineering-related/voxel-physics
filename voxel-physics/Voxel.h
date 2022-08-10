@@ -20,9 +20,16 @@ public:
 	Voxel(vec3 position, vec3 rotation, vec3 color);
 	~Voxel();
 	static void init(const uint32_t& numInstances);
-	static void draw(Shader* shader, Camera* camera, PointLight* light);
+	static void drawAll(Shader* shader, Camera* camera, PointLight* light);
 	static void end();
-	mat4x4 getMatrix() const;
+
+	inline const vec3& getPosition() const { return m_Position; }
+	inline const vec3& getRotation() const { return m_Rotation; }
+	inline const vec3& getColor() const { return m_Color; }
+
+	void setPosition(const vec3& position);
+	void setRotation(const vec3& eulerRotationDeg);
+	void setColor(const vec3& color);
 
 private:
 	inline static const std::array<uint32_t, 36> s_Indices = {
@@ -79,10 +86,17 @@ private:
 	};
 
 	inline static uint32_t s_InstanceCount = 0;
-	inline static mat4x4* s_ModelMatrices;
 	inline static vec3* s_Colors;
+	inline static mat4x4* s_ModelMatrices;
 	inline static GLuint s_VoxelVAO, s_VoxelVBO, s_VoxelEBO;
 	inline static GLuint s_ModelInstanceVBO, s_ColorInstanceVBO;
+
+	void updateModelMatrixCPU();
+	void updateColorCPU();
+	static void updateModelMatrixGPU();
+	static void updateColorGPU();
+	
+	mat4x4 getMatrix() const;
 
 	vec3 m_Position;
 	vec3 m_Rotation;

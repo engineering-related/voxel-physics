@@ -1,30 +1,36 @@
 #include "Voxel.h"
 
+// TODO: This could potentially be dynamic
+#define MAX_INSTANCES 100000
+
 namespace engine {
 
 Voxel::Voxel(vec3 position, vec3 rotation, vec3 color) 
 	: m_Position(position), m_Rotation(rotation), m_Color(color)
 {
-	s_Colors[s_InstanceCount] = m_Color;
-	s_ModelMatrices[s_InstanceCount] = getMatrix();
+	assert(s_InstanceCount < MAX_INSTANCES);
+	if (s_InstanceCount == 0)
+		init(MAX_INSTANCES);
 
-	glBindBuffer(GL_ARRAY_BUFFER, s_ColorInstanceVBO);
-	glBufferSubData(GL_ARRAY_BUFFER, s_InstanceCount * sizeof(vec3), sizeof(vec3) * 1, &s_Colors[s_InstanceCount]);
-
-	glBindBuffer(GL_ARRAY_BUFFER, s_ModelInstanceVBO);
-	glBufferSubData(GL_ARRAY_BUFFER, s_InstanceCount * sizeof(mat4x4), sizeof(mat4x4) * 1, &s_ModelMatrices[s_InstanceCount]);
-
-	m_InstanceIndex = s_InstanceCount++;
+	m_InstanceIndex = s_InstanceCount;
+	s_InstanceCount++;
+	
+	updateColorCPU();
+	updateModelMatrixCPU();
 }
 Voxel::~Voxel()
 {
-
+	if (s_InstanceCount == 0)
+		end();
 }
 
 void Voxel::init(const uint32_t& numInstances)
 {
 	s_Colors = new vec3[numInstances];
 	s_ModelMatrices = new mat4x4[numInstances];
+
+	updateColorGPU();
+	updateModelMatrixGPU();
 
 	// store instance color data in array buffer
     glGenBuffers(1, &s_ColorInstanceVBO);
@@ -92,15 +98,36 @@ void Voxel::end()
 	delete[] s_Colors;
 }
 
-void Voxel::draw(Shader* shader, Camera* camera, PointLight* light)
+void Voxel::setPosition(const vec3& position)
+{
+	m_Position = position;
+	updateModelMatrixCPU();
+}
+
+void Voxel::setRotation(const vec3& eulerRotationDeg)
+{
+	m_Rotation = eulerRotationDeg;
+	updateModelMatrixCPU();
+}
+
+void Voxel::setColor(const vec3& color)
+{
+	m_Color = color;
+	updateColorCPU();
+}
+
+void Voxel::drawAll(Shader* shader, Camera* camera, PointLight* light)
 {
 	shader->use();
-	shader->setUniform<mat4x4>("u_View", camera->getViewMatrix());
-	shader->setUniform<mat4x4>("u_Projection", camera->getProjectionMatrix());
+	shader->setUniform<mat4x4>("u_CamMatrix", camera->getMatrix());
 	shader->setUniform<vec3>("u_CamPos", camera->getEye());
 	shader->setUniform<vec3>("u_LightDir", light->getDirection());
 	shader->setUniform<float>("u_Ambient", light->getAmbient());
 	shader->setUniform<float>("u_Specular", light->getSpecular());
+
+	// TODO: Don't need to update everything every frame etc.
+	updateColorGPU();
+	updateModelMatrixGPU();
 
 	glBindVertexArray(s_VoxelVAO);
 	glDrawElementsInstanced(GL_TRIANGLES, s_Indices.size(), GL_UNSIGNED_INT, nullptr, s_InstanceCount);
@@ -119,9 +146,31 @@ mat4x4 Voxel::getMatrix() const
 		vec3(0.0f, 0.0f, 1.0f));
 
 	mat4 TRS(1.f);
-	// translation * rotation * scale (also know as TRS matrix)
+	// translation * rotation * scale
 	TRS = translate(TRS, m_Position) * transformY * transformX * transformZ;
 	return TRS;
+}
+
+void Voxel::updateModelMatrixCPU()
+{
+	s_ModelMatrices[m_InstanceIndex] = getMatrix();
+}
+
+void Voxel::updateColorCPU()
+{
+	s_Colors[m_InstanceIndex] = m_Color;
+}
+
+void Voxel::updateModelMatrixGPU()
+{
+	glBindBuffer(GL_ARRAY_BUFFER, s_ModelInstanceVBO);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(mat4x4) * s_InstanceCount, &s_ModelMatrices[0]);
+}
+
+void Voxel::updateColorGPU()
+{
+	glBindBuffer(GL_ARRAY_BUFFER, s_ColorInstanceVBO);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vec3) * s_InstanceCount, &s_Colors[0]);
 }
 
 }
