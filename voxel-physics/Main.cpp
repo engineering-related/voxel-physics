@@ -1,6 +1,7 @@
 #include "Logger.h"
 #include "Window.h"
 #include "GUI.h"
+#include "PointLight.h"
 #include "Voxel.h"
 
 using namespace engine;
@@ -22,14 +23,15 @@ int main() {
     std::uniform_real_distribution<> rotationDist(-90.f, 90.f);
     std::uniform_real_distribution<> colorDist(0.f, 1.0f);
 
-	uint32_t numInstances = 1000;
-	Voxels::init(numInstances);
+	uint32_t numInstances = 100;
+	Voxel::init(numInstances);
 
+	std::vector<Voxel*> voxels;
 	for (int32_t i = 0; i < numInstances; i++) {
 		vec3 position = { positionDist(rng), positionDist(rng), positionDist(rng) };
 		vec3 rotation = { rotationDist(rng), rotationDist(rng), rotationDist(rng) };
 		vec3 color = { colorDist(rng), colorDist(rng), colorDist(rng) };
-		Voxels::create(position, rotation, color);
+		voxels.push_back(new Voxel(position, rotation, color));
 	}
 
 	// Camera
@@ -62,9 +64,13 @@ int main() {
 	}
 
 	// Light
-	vec3 lightDir(-1.0f, -1.0f, -0.5f);
-	float ambient = 0.20f;
-	float specular = 0.40f;
+	PointLight* light;
+	{
+		vec3 direction = { -1.0f, -1.0f, -0.5f };
+		float ambient = 0.20f;
+		float specular = 0.40f;
+		light = new PointLight(direction, ambient, specular);
+	};
 
 	// Loop
 	float lastTimeSim = 0.0f;
@@ -80,23 +86,15 @@ int main() {
 		window->clear(BufferBit::COLOR | BufferBit::DEPTH);
 
 		camera->update(deltaTime);
-
-		shader->setUniform<mat4x4>("u_View", camera->getViewMatrix());
-		shader->setUniform<mat4x4>("u_Projection", camera->getProjectionMatrix());
-		shader->setUniform<vec3>("u_CamPos", camera->getEye());
-		shader->setUniform<vec3>("u_LightDir", lightDir);
-		shader->setUniform<float>("u_Ambient", ambient);
-		shader->setUniform<float>("u_Specular", specular);
-
-		Voxels::draw(shader, camera);
+		Voxel::draw(shader, camera, light);
 
 		gui->start();
 		gui->submit([&]() {
 			gui::Begin("Controls                                                                       "); 
 			gui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / gui::GetIO().Framerate, gui::GetIO().Framerate);
-			gui::SliderFloat3("Light Direction", value_ptr(lightDir), -1.0f, 1.0f);
-			gui::SliderFloat("Ambient", &ambient, 0.0f, 1.0f);
-			gui::SliderFloat("Specular", &specular, 0.0f, 1.0f);
+			gui::SliderFloat3("Light Direction", value_ptr(light->getDirection()), -1.0f, 1.0f);
+			gui::SliderFloat("Ambient", &light->getAmbient(), 0.0f, 1.0f);
+			gui::SliderFloat("Specular", &light->getSpecular(), 0.0f, 1.0f);
 			gui::End();
 		});
 		gui->end();
@@ -107,10 +105,11 @@ int main() {
 	}
 
 	// Cleanup
-	Voxels::end();
+	Voxel::end();
 	delete gui;
 	delete camera;
 	delete shader;
+	delete light;
 	delete window;
 
 	return 0;

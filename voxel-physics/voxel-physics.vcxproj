@@ -161,15 +161,12 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Easing.h" />
     <ClInclude Include="GUI.h" />
-    <ClInclude Include="IndexBuffer.h" />
+    <ClInclude Include="PointLight.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Utils.h" />
-    <ClInclude Include="VertexArray.h" />
-    <ClInclude Include="VertexBuffer.h" />
-    <ClInclude Include="VertexBufferLayout.h" />
     <ClInclude Include="Voxel.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

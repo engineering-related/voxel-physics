@@ -25,9 +25,6 @@
     <Filter Include="Header Files\core">
       <UniqueIdentifier>{903b4ad6-d809-4f9d-ba38-79620449795c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\core\gfx">
-      <UniqueIdentifier>{eeacba53-1209-4a74-a060-d70eb5c76144}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files\shaders">
       <UniqueIdentifier>{5a063885-9cc1-43e5-b022-e1611079bdb1}</UniqueIdentifier>
     </Filter>
@@ -68,15 +65,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="VertexArray.h">
-      <Filter>Header Files\core\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files\core\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexBufferLayout.h">
-      <Filter>Header Files\core\gfx</Filter>
-    </ClInclude>
     <ClInclude Include="Types.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
@@ -85,12 +73,6 @@
     </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>Header Files\core</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexBuffer.h">
-      <Filter>Header Files\core\gfx</Filter>
-    </ClInclude>
-    <ClInclude Include="IndexBuffer.h">
-      <Filter>Header Files\core\gfx</Filter>
     </ClInclude>
     <ClInclude Include="Logger.h">
       <Filter>Header Files\core</Filter>
@@ -109,6 +91,12 @@
     </ClInclude>
     <ClInclude Include="Voxel.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLight.h">
+      <Filter>Header Files\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

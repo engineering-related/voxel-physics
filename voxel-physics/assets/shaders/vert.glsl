@@ -3,7 +3,8 @@
 // Positions/Coordinates
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in int aFace;
-layout (location = 2) in vec3 aPosOffset;
+layout (location = 2) in vec3 aColor;
+layout (location = 3) in mat4 aModel;
 
 // Outputs the current position for the Fragment Shader
 out vec3 Position;
@@ -32,10 +33,10 @@ vec3 getNormal(int face) {
 }
 
 void main() {
-  Position = vec3(vec4(aPos + aPosOffset, 1.0f));
-  //mat3 normalMatrix = transpose(inverse(mat3(aModel)));
-  Normal = /*normalMatrix **/ getNormal(aFace);
-  Color = vec4(1.0f);
+  Position = vec3(aModel * vec4(aPos, 1.0f));
+  mat3 normalMatrix = transpose(inverse(mat3(aModel)));
+  Normal = normalMatrix * getNormal(aFace);
+  Color = vec4(aColor, 1.0f);
 
   gl_Position = u_Projection * u_View * vec4(Position, 1.0);
 }
