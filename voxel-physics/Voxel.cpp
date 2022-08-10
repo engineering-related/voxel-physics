@@ -20,6 +20,7 @@ Voxel::Voxel(vec3 position, vec3 rotation, vec3 color)
 }
 Voxel::~Voxel()
 {
+	s_InstanceCount--;
 	if (s_InstanceCount == 0)
 		end();
 }
