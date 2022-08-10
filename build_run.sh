@@ -21,7 +21,7 @@ else
   cd ..
 fi
 
-cp -a -r resources/ build/
+cp -a -r voxel-physics/assets/ build/
 cd build && make
 
 if [ "$params" == "-debug" ] ||
