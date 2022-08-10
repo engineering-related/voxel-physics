@@ -106,6 +106,9 @@ int main() {
 
 	// Cleanup
 	Voxel::end();
+	for (auto& voxel : voxels)
+		delete voxel;
+	voxels.clear();
 	delete gui;
 	delete camera;
 	delete shader;
