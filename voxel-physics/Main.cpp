@@ -11,7 +11,7 @@ int main() {
 
 	// Window
 	std::string title = "Voxel Physics";
-	Window* window = new Window(1600, 900, title, false, true, true, 4);
+	Window* window = new Window(1600, 900, title, false, false, true, 4);
 
 	// GUI
 	GUI* gui = new GUI(window);
@@ -22,13 +22,14 @@ int main() {
     std::uniform_real_distribution<> rotationDist(-90.f, 90.f);
     std::uniform_real_distribution<> colorDist(0.f, 1.0f);
 
-	// NOTE: This is very unoptimized but is only used for testing purposes
-	std::vector<Voxel*> voxels;
-	for (int32_t i = 0; i < 100; i++) {
+	uint32_t numInstances = 1000;
+	Voxels::init(numInstances);
+
+	for (int32_t i = 0; i < numInstances; i++) {
 		vec3 position = { positionDist(rng), positionDist(rng), positionDist(rng) };
 		vec3 rotation = { rotationDist(rng), rotationDist(rng), rotationDist(rng) };
 		vec3 color = { colorDist(rng), colorDist(rng), colorDist(rng) };
-		voxels.push_back(new Voxel(position, rotation, color));
+		Voxels::create(position, rotation, color);
 	}
 
 	// Camera
@@ -87,10 +88,7 @@ int main() {
 		shader->setUniform<float>("u_Ambient", ambient);
 		shader->setUniform<float>("u_Specular", specular);
 
-		for (auto& voxel : voxels) {
-			voxel->setRotation(vec3(voxel->getRotation()) += deltaTime * 100);
-			voxel->draw(shader, camera);
-		}
+		Voxels::draw(shader, camera);
 
 		gui->start();
 		gui->submit([&]() {
@@ -109,10 +107,7 @@ int main() {
 	}
 
 	// Cleanup
-	for (auto& voxel : voxels) {
-		delete voxel;
-	} voxels.clear();
-
+	Voxels::end();
 	delete gui;
 	delete camera;
 	delete shader;

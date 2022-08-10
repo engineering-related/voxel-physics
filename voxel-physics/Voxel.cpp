@@ -2,89 +2,60 @@
 
 namespace engine {
 
-Voxel::Voxel(vec3 position, vec3 rotation, vec3 color)
+void Voxels::init(const uint32_t& numInstances)
 {
-	m_Position = position;
-	m_Rotation = rotation;
-	m_Color = color;
+	s_PosOffsets = new vec3[numInstances];
 
-	float w = 1.0f;
+    // store instance data in an array buffer
+    glGenBuffers(1, &s_InstanceVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, s_InstanceVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * numInstances, &s_PosOffsets[0], GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+	// Create voxel buffers
+	glGenVertexArrays(1, &s_VoxelVAO);
+    glGenBuffers(1, &s_VoxelVBO);
+	glGenBuffers(1, &s_VoxelEBO);
 
-	const std::array<Vertex, 24> vertices = {
-		// Front
-		Vertex{{-w/2, -w/2, -w/2}, color, 0},
-		Vertex{{-w/2, +w/2, -w/2}, color, 0},
-		Vertex{{+w/2, +w/2, -w/2}, color, 0},
-		Vertex{{+w/2, -w/2, -w/2}, color, 0},
-		// Back
-		Vertex{{-w/2, -w/2, +w/2}, color, 1},
-		Vertex{{-w/2, +w/2, +w/2}, color, 1},
-		Vertex{{+w/2, +w/2, +w/2}, color, 1},
-		Vertex{{+w/2, -w/2, +w/2}, color, 1},
-		// Top
-		Vertex{{-w/2, +w/2, -w/2}, color, 2},
-		Vertex{{-w/2, +w/2, +w/2}, color, 2},
-		Vertex{{+w/2, +w/2, +w/2}, color, 2},
-		Vertex{{+w/2, +w/2, -w/2}, color, 2},
-		//  Bottom
-		Vertex{{-w/2, -w/2, -w/2}, color, 3},
-		Vertex{{-w/2, -w/2, +w/2}, color, 3},
-		Vertex{{+w/2, -w/2, +w/2}, color, 3},
-		Vertex{{+w/2, -w/2, -w/2}, color, 3},
-		// Left
-		Vertex{{-w/2, -w/2, -w/2}, color, 4},
-		Vertex{{-w/2, -w/2, +w/2}, color, 4},
-		Vertex{{-w/2, +w/2, +w/2}, color, 4},
-		Vertex{{-w/2, +w/2, -w/2}, color, 4},
-		// Right
-		Vertex{{+w/2, -w/2, -w/2}, color, 5},
-		Vertex{{+w/2, -w/2, +w/2}, color, 5},
-		Vertex{{+w/2, +w/2, +w/2}, color, 5},
-		Vertex{{+w/2, +w/2, -w/2}, color, 5}
-	};
+    glBindVertexArray(s_VoxelVAO);
 
+    glBindBuffer(GL_ARRAY_BUFFER, s_VoxelVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * s_Vertices.size(), s_Vertices.data(), GL_STATIC_DRAW);
 
-	m_VAO = new VertexArray();
-	m_VBO = new VertexBuffer(vertices.data(), vertices.size() * sizeof(Vertex));
-	m_EBO = new IndexBuffer(s_Indices.data(), s_Indices.size());
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s_VoxelEBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint32_t) * s_Indices.size(), s_Indices.data(), GL_STATIC_DRAW);
 
-    VertexBufferLayout layout;
-    layout.push<float>(3);
-    layout.push<float>(3);
-	layout.push<float>(1);
-    m_VAO->addVertexBuffer(m_VBO, layout);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(3 * sizeof(float)));
+	//also set instance data
+	glEnableVertexAttribArray(2);
+	glBindBuffer(GL_ARRAY_BUFFER, s_InstanceVBO); // this attribute comes from a different vertex buffer
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glVertexAttribDivisor(2, 1); // tell OpenGL this is an instanced vertex attribute.
+}
+void Voxels::create(vec3 position, vec3 rotation, vec3 color)
+{
+	s_PosOffsets[s_InstanceCount] = position;
+	glBindBuffer(GL_ARRAY_BUFFER, s_InstanceVBO);
+	glBufferSubData(GL_ARRAY_BUFFER, s_InstanceCount * sizeof(vec3), sizeof(vec3) * 1, &s_PosOffsets[s_InstanceCount]);
+	s_InstanceCount++;
 }
 
-mat4x4 Voxel::getMatrix() const {
-	const mat4 transformX = rotate(mat4(1.0f),
-		radians(m_Rotation.x),
-		vec3(1.0f, 0.0f, 0.0f));
-	const mat4 transformY = rotate(mat4(1.0f),
-		radians(m_Rotation.y),
-		vec3(0.0f, 1.0f, 0.0f));
-	const mat4 transformZ = rotate(mat4(1.0f),
-		radians(m_Rotation.z),
-		vec3(0.0f, 0.0f, 1.0f));
-
-	mat4 TRS(1.f);
-	// translation * rotation * scale (also know as TRS matrix)
-	TRS = translate(TRS, m_Position) * transformY * transformX * transformZ;
-	return TRS;
+void Voxels::end()
+{
+	glDeleteBuffers(1, &s_InstanceVBO);
+	glDeleteBuffers(1, &s_VoxelVBO);
+	glDeleteBuffers(1, &s_VoxelEBO);
+	glDeleteVertexArrays(1, &s_VoxelVAO);
+	delete[] s_PosOffsets;
 }
 
-void Voxel::draw(Shader* shader, Camera* camera) {
+void Voxels::draw(Shader* shader, Camera* camera) {
 	shader->use();
-	shader->setUniform<mat4x4>("u_Model", getMatrix());
-
-	m_VAO->bind();
-	glDrawElements(GL_TRIANGLES, s_Indices.size(), GL_UNSIGNED_INT, nullptr);
-}
-
-Voxel::~Voxel()
-{
-	delete m_EBO;
-	delete m_VBO;
-	delete m_VAO;
+	glBindVertexArray(s_VoxelVAO);
+	glDrawElementsInstanced(GL_TRIANGLES, s_Indices.size(), GL_UNSIGNED_INT, nullptr, s_InstanceCount);
 }
 
 }

@@ -13,26 +13,19 @@ namespace engine {
 
 struct Vertex {
   vec3 position;
-  vec3 color;
   uint32_t face;
 };
 
-class Voxel
+class Voxels
 {
 public:
-	Voxel(vec3 position, vec3 rotation, vec3 color);
-	~Voxel();
-
-	void draw(Shader* shader, Camera* camera);
-	inline void setRotation(const vec3& eulerAngleDeg) { m_Rotation = eulerAngleDeg;  }
-	inline void setPosition(const vec3& positionWorldSpace) { m_Position = positionWorldSpace; }
-
-	inline const vec3& getRotation() const { return m_Rotation; }
-	inline const vec3& getPosition() const { return m_Position; }
+	static void init(const uint32_t& numInstances);
+	static void create(vec3 position, vec3 rotation, vec3 color);
+	static void destroy();
+	static void draw(Shader* shader, Camera* camera);
+	static void end();
 
 private:
-	mat4x4 getMatrix() const;
-
 	inline static const std::array<uint32_t, 36> s_Indices = {
 	  // Front
 	  0, 1, 2,
@@ -54,13 +47,45 @@ private:
 	  20, 22, 23
 	};
 
-	vec3 m_Position;
-	vec3 m_Rotation;
-	vec3 m_Color;
+	inline static const float w = 1.0f;
+	inline static const std::array<Vertex, 24> s_Vertices = {
+		// Front
+		Vertex{{-w/2, -w/2, -w/2}, 0},
+		Vertex{{-w/2, +w/2, -w/2}, 0},
+		Vertex{{+w/2, +w/2, -w/2}, 0},
+		Vertex{{+w/2, -w/2, -w/2}, 0},
+		// Back
+		Vertex{{-w/2, -w/2, +w/2}, 1},
+		Vertex{{-w/2, +w/2, +w/2}, 1},
+		Vertex{{+w/2, +w/2, +w/2}, 1},
+		Vertex{{+w/2, -w/2, +w/2}, 1},
+		// Top
+		Vertex{{-w/2, +w/2, -w/2}, 2},
+		Vertex{{-w/2, +w/2, +w/2}, 2},
+		Vertex{{+w/2, +w/2, +w/2}, 2},
+		Vertex{{+w/2, +w/2, -w/2}, 2},
+		//  Bottom
+		Vertex{{-w/2, -w/2, -w/2}, 3},
+		Vertex{{-w/2, -w/2, +w/2}, 3},
+		Vertex{{+w/2, -w/2, +w/2}, 3},
+		Vertex{{+w/2, -w/2, -w/2}, 3},
+		// Left
+		Vertex{{-w/2, -w/2, -w/2}, 4},
+		Vertex{{-w/2, -w/2, +w/2}, 4},
+		Vertex{{-w/2, +w/2, +w/2}, 4},
+		Vertex{{-w/2, +w/2, -w/2}, 4},
+		// Right
+		Vertex{{+w/2, -w/2, -w/2}, 5},
+		Vertex{{+w/2, -w/2, +w/2}, 5},
+		Vertex{{+w/2, +w/2, +w/2}, 5},
+		Vertex{{+w/2, +w/2, -w/2}, 5}
+	};
 
-	VertexArray* m_VAO;
-	VertexBuffer* m_VBO;
-	IndexBuffer* m_EBO;
+	inline static uint32_t s_InstanceCount = 0;
+	inline static vec3* s_PosOffsets;
+	inline static GLuint s_VoxelVAO, s_VoxelVBO, s_VoxelEBO;
+	inline static GLuint s_InstanceVBO;
+	virtual void makeAbstract() = 0;
 };
 
 }
