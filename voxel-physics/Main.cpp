@@ -18,8 +18,18 @@ int main() {
 	Shader* shader = new Shader("assets/shaders/vert.glsl",
                               "assets/shaders/frag.glsl");
 
-	Voxel voxel1({ 0, 0, 0 }, { 0, 0, 0 }, { 0.5f, 0.2f, 0.6f });
-	Voxel voxel2({ 1, 0, 0 }, { 0, 0, 0 }, { 0.7f, 0.32f, 0.15f });
+    std::uniform_real_distribution<> positionDist(-20.f, 20.f);
+    std::uniform_real_distribution<> rotationDist(-90.f, 90.f);
+    std::uniform_real_distribution<> colorDist(0.f, 1.0f);
+
+	// NOTE: This is very unoptimized but is only used for testing purposes
+	std::vector<Voxel*> voxels;
+	for (int32_t i = 0; i < 100; i++) {
+		vec3 position = { positionDist(rng), positionDist(rng), positionDist(rng) };
+		vec3 rotation = { rotationDist(rng), rotationDist(rng), rotationDist(rng) };
+		vec3 color = { colorDist(rng), colorDist(rng), colorDist(rng) };
+		voxels.push_back(new Voxel(position, rotation, color));
+	}
 
 	// Camera
 	Camera* camera;
@@ -77,13 +87,10 @@ int main() {
 		shader->setUniform<float>("u_Ambient", ambient);
 		shader->setUniform<float>("u_Specular", specular);
 
-		voxel1.draw(shader, camera);
-		voxel2.draw(shader, camera);
-
-		voxel1.setRotation(vec3(voxel1.getRotation()) += deltaTime * 100);
-		static float angle = 0;
-		angle += deltaTime;
-		voxel1.setPosition(vec3(cos(angle) + 2, sin(angle) + 2, sin(angle) + 2));
+		for (auto& voxel : voxels) {
+			voxel->setRotation(vec3(voxel->getRotation()) += deltaTime * 100);
+			voxel->draw(shader, camera);
+		}
 
 		gui->start();
 		gui->submit([&]() {
@@ -102,10 +109,14 @@ int main() {
 	}
 
 	// Cleanup
-	delete window;
+	for (auto& voxel : voxels) {
+		delete voxel;
+	} voxels.clear();
+
 	delete gui;
 	delete camera;
 	delete shader;
+	delete window;
 
 	return 0;
 }
