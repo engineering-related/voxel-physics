@@ -17,21 +17,32 @@ struct Vertex {
 class Voxel
 {
 public:
-	Voxel(vec3 position, vec3 rotation, vec3 color);
+	Voxel(vec3 position, vec3 rotation, vec3 scale, vec3 color);
 	~Voxel();
-	static void init(const uint32_t& numInstances);
 	static void drawAll(Shader* shader, Camera* camera, PointLight* light);
-	static void end();
 
 	inline const vec3& getPosition() const { return m_Position; }
 	inline const vec3& getRotation() const { return m_Rotation; }
 	inline const vec3& getColor() const { return m_Color; }
+	inline float getMass() const { return m_Scale.x * m_Scale.y * m_Scale.z; }
 
 	void setPosition(const vec3& position);
 	void setRotation(const vec3& eulerRotationDeg);
+	void setScale(const vec3& scale);
 	void setColor(const vec3& color);
+	void update(const float& deltaTime);
+	void applyForce(const vec3& force);
 
 private:
+	static void init(const uint32_t& numInstances);
+	static void end();
+	static void updateModelMatrixGPU();
+	static void updateColorGPU();
+
+	void updateModelMatrixCPU();
+	void updateColorCPU();
+	mat4x4 getMatrix() const;
+
 	inline static const std::array<uint32_t, 36> s_Indices = {
 	  // Front
 	  0, 1, 2,
@@ -91,15 +102,11 @@ private:
 	inline static GLuint s_VoxelVAO, s_VoxelVBO, s_VoxelEBO;
 	inline static GLuint s_ModelInstanceVBO, s_ColorInstanceVBO;
 
-	void updateModelMatrixCPU();
-	void updateColorCPU();
-	static void updateModelMatrixGPU();
-	static void updateColorGPU();
-	
-	mat4x4 getMatrix() const;
-
 	vec3 m_Position;
 	vec3 m_Rotation;
+	vec3 m_Scale;
+	vec3 m_Velocity;
+	vec3 m_Acc;
 	vec3 m_Color;
 	uint32_t m_InstanceIndex;
 };

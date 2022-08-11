@@ -1,12 +1,12 @@
 #include "Voxel.h"
 
 // TODO: This could potentially be dynamic
-#define MAX_INSTANCES 100000
+#define MAX_INSTANCES 150000
 
 namespace engine {
 
-Voxel::Voxel(vec3 position, vec3 rotation, vec3 color) 
-	: m_Position(position), m_Rotation(rotation), m_Color(color)
+Voxel::Voxel(vec3 position, vec3 rotation, vec3 scale, vec3 color) 
+	: m_Position(position), m_Rotation(rotation), m_Scale(scale), m_Color(color)
 {
 	assert(s_InstanceCount < MAX_INSTANCES);
 	if (s_InstanceCount == 0)
@@ -111,6 +111,12 @@ void Voxel::setRotation(const vec3& eulerRotationDeg)
 	updateModelMatrixCPU();
 }
 
+void Voxel::setScale(const vec3& scale)
+{
+	m_Scale = scale;
+	updateModelMatrixCPU();
+}
+
 void Voxel::setColor(const vec3& color)
 {
 	m_Color = color;
@@ -134,6 +140,20 @@ void Voxel::drawAll(Shader* shader, Camera* camera, PointLight* light)
 	glDrawElementsInstanced(GL_TRIANGLES, s_Indices.size(), GL_UNSIGNED_INT, nullptr, s_InstanceCount);
 }
 
+// TODO: this can be done in a compute shader
+void Voxel::update(const float& deltaTime)
+{
+	m_Velocity += m_Acc * deltaTime;
+	m_Position += m_Velocity * deltaTime;
+	updateModelMatrixCPU();
+}
+
+void Voxel::applyForce(const vec3& force)
+{
+	// a = F/m;
+	m_Acc += (force / getMass());
+}
+
 mat4x4 Voxel::getMatrix() const 
 {
 	const mat4 transformX = rotate(mat4(1.0f),
@@ -148,7 +168,7 @@ mat4x4 Voxel::getMatrix() const
 
 	mat4 TRS(1.f);
 	// translation * rotation * scale
-	TRS = translate(TRS, m_Position) * transformY * transformX * transformZ;
+	TRS = translate(TRS, m_Position) * scale(TRS, m_Scale) * transformY * transformX * transformZ;
 	return TRS;
 }
 

@@ -19,16 +19,31 @@ int main() {
 	Shader* shader = new Shader("assets/shaders/vert.glsl",
                               "assets/shaders/frag.glsl");
 
-    std::uniform_real_distribution<> positionDist(-100.f, 100.f);
-    std::uniform_real_distribution<> rotationDist(-90.f, 90.f);
-    std::uniform_real_distribution<> colorDist(0.f, 1.0f);
 
 	std::vector<Voxel*> voxels;
-	for (int32_t i = 0; i < 20000; i++) {
-		vec3 position = { positionDist(rng), positionDist(rng), positionDist(rng) };
-		vec3 rotation = { rotationDist(rng), rotationDist(rng), rotationDist(rng) };
-		vec3 color = { colorDist(rng), colorDist(rng), colorDist(rng) };
-		voxels.push_back(new Voxel(position, rotation, color));
+	{
+		std::uniform_int_distribution<> densityDist(0, 10);
+		std::uniform_real_distribution<> rotationDist(-90.f, 90.0f);
+		std::uniform_real_distribution<> colorDist(0.f, 1.0f);
+		std::uniform_real_distribution<> scaleDist(0.5f, 1.f);
+		std::uniform_real_distribution<> forceDist(-1.f, 1.f);
+
+		for (int32_t z = 0; z < 30; z++) {
+			for (int32_t y = 0; y < 30; y++) {
+				for (int32_t x = 0; x < 30; x++) {
+					if (densityDist(rng) == 0) {
+						vec3 position = { x, y, z };
+						vec3 rotation = { rotationDist(rng), rotationDist(rng), rotationDist(rng) };
+						vec3 scale = { scaleDist(rng), scaleDist(rng), scaleDist(rng) };
+						vec3 color = { colorDist(rng), colorDist(rng), colorDist(rng) };
+						Voxel* voxel = new Voxel(position, rotation, scale, color);
+						vec3 force = { forceDist(rng), forceDist(rng), forceDist(rng) };
+						voxel->applyForce(force);
+						voxels.push_back(voxel);
+					}
+				}
+			}
+		}
 	}
 
 	// Camera
@@ -43,7 +58,7 @@ int main() {
 			window,
 			{0.f, 0.f, 0.f}, // Center
 			{0, 1, 0},       // UpVector
-			100.0f,          // Radius
+			150.0f,          // Radius
 			0.f,             // AzimuthAngle
 			0.f,             // PolarAngle
 			perspective(FOV, aspectRatio, nearPlane, farPlane),
@@ -84,14 +99,9 @@ int main() {
 
 		camera->update(deltaTime);
 
-		static float angle = 0;
-		angle += deltaTime;
-		for (size_t i = 0; i < 1000; i++)
-		{
-			vec3 rotation = voxels[i]->getRotation();
-			rotation += deltaTime * 100.f;
-			voxels[i]->setRotation(rotation);
-		}
+		for (auto& voxel : voxels)
+			voxel->update(deltaTime);
+
 		Voxel::drawAll(shader, camera, light);
 
 		gui->start();

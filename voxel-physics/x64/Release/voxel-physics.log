@@ -1,13 +1,13 @@
-﻿Build started 2022-08-10 23:26:10.
+﻿Build started 2022-08-11 09:01:16.
 Logging verbosity is set to: Normal.     1>Project "C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\voxel-physics.vcxproj" on node 2 (Build target(s)).
      1>InitializeBuildStatus:
          Creating "x64\Release\voxel-physics.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x64\CL.exe /c /I"C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\libraries\include" /Zi /nologo /W3 /WX- /diagnostics:column /sdl /O2 /Oi /GL /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"x64\Release\\" /Fd"x64\Release\vc142.pdb" /external:W3 /Gd /TP /FC /errorReport:prompt Voxel.cpp
-         Voxel.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x64\CL.exe /c /I"C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\libraries\include" /Zi /nologo /W3 /WX- /diagnostics:column /sdl /O2 /Oi /GL /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"x64\Release\\" /Fd"x64\Release\vc142.pdb" /external:W3 /Gd /TP /FC /errorReport:prompt Main.cpp
+         Main.cpp
      1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Shader.h(94,27): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
      1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Shader.h(93,27): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
-     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Voxel.cpp(134,99): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+     1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Main.cpp(96,28): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
      1>C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(146,15): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
        C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(145): message : while compiling class template member function 'float engine::Ease<glm::vec3>::outCirc(float)'
        C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(47): message : see reference to function template instantiation 'float engine::Ease<glm::vec3>::outCirc(float)' being compiled
@@ -44,7 +44,7 @@ Logging verbosity is set to: Normal.     1>Project "C:\Users\vikto\Code\GitHub\v
          x64\Release\Voxel.obj
      1>LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
          Generating code
-         3 of 2479 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+         1 of 2493 functions (<0.1%) were compiled, the rest were copied from previous compilation.
            0 functions were new in current compilation
            17 functions had inline decision re-evaluated but remain unchanged
          Finished generating code
@@ -53,12 +53,12 @@ Logging verbosity is set to: Normal.     1>Project "C:\Users\vikto\Code\GitHub\v
      1>glfw3.lib(input.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(input.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
      1>glfw3.lib(monitor.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(monitor.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
      1>glfw3.lib(vulkan.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(vulkan.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
-     1>glfw3.lib(window.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(window.obj)' or at ''; linking object as if no debug info
+     1>glfw3.lib(window.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(window.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
      1>glfw3.lib(win32_init.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_init.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
      1>glfw3.lib(win32_joystick.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_joystick.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
-     1>glfw3.lib(win32_monitor.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_monitor.obj)' or at ''; linking object as if no debug info
+     1>glfw3.lib(win32_monitor.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_monitor.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
      1>glfw3.lib(win32_time.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_time.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
-     1>glfw3.lib(win32_thread.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_thread.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
+     1>glfw3.lib(win32_thread.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_thread.obj)' or at ''; linking object as if no debug info
      1>glfw3.lib(win32_window.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_window.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
      1>glfw3.lib(wgl_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(wgl_context.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
      1>glfw3.lib(egl_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(egl_context.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
@@ -75,7 +75,7 @@ Build succeeded.
        (ClCompile target) -> 
          C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Shader.h(94,27): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
          C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Shader.h(93,27): warning C4244: 'argument': conversion from 'double' to 'GLuint', possible loss of data
-         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Voxel.cpp(134,99): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+         C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Main.cpp(96,28): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
          C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(146,15): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
          C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(142,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
          C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\Easing.h(138,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
@@ -93,12 +93,12 @@ Build succeeded.
          glfw3.lib(input.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(input.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
          glfw3.lib(monitor.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(monitor.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
          glfw3.lib(vulkan.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(vulkan.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
-         glfw3.lib(window.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(window.obj)' or at ''; linking object as if no debug info
+         glfw3.lib(window.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(window.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
          glfw3.lib(win32_init.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_init.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
          glfw3.lib(win32_joystick.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_joystick.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
-         glfw3.lib(win32_monitor.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_monitor.obj)' or at ''; linking object as if no debug info
+         glfw3.lib(win32_monitor.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_monitor.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
          glfw3.lib(win32_time.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_time.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
-         glfw3.lib(win32_thread.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_thread.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
+         glfw3.lib(win32_thread.obj) : warning LNK4099: PDB '' was not found with 'glfw3.lib(win32_thread.obj)' or at ''; linking object as if no debug info
          glfw3.lib(win32_window.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_window.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
          glfw3.lib(wgl_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(wgl_context.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
          glfw3.lib(egl_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(egl_context.obj)' or at 'C:\Users\vikto\Code\GitHub\voxel-physics\voxel-physics\x64\Release\glfw.pdb'; linking object as if no debug info
@@ -107,4 +107,4 @@ Build succeeded.
     26 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:03.72
+Time Elapsed 00:00:03.50
