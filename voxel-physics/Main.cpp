@@ -22,15 +22,15 @@ int main() {
 
 	std::vector<Voxel*> voxels;
 	{
-		std::uniform_int_distribution<> densityDist(0, 10);
+		std::uniform_int_distribution<> densityDist(0, 1);
 		std::uniform_real_distribution<> rotationDist(-90.f, 90.0f);
 		std::uniform_real_distribution<> colorDist(0.f, 1.0f);
 		std::uniform_real_distribution<> scaleDist(0.5f, 1.f);
 		std::uniform_real_distribution<> forceDist(-1.f, 1.f);
 
-		for (int32_t z = 0; z < 30; z++) {
-			for (int32_t y = 0; y < 30; y++) {
-				for (int32_t x = 0; x < 30; x++) {
+		for (int32_t z = -10; z < 10; z++) {
+			for (int32_t y = -10; y < 10; y++) {
+				for (int32_t x = -10; x < 10; x++) {
 					if (densityDist(rng) == 0) {
 						vec3 position = { x, y, z };
 						vec3 rotation = { rotationDist(rng), rotationDist(rng), rotationDist(rng) };
